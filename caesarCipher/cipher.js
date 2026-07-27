@@ -1,10 +1,12 @@
 const input = process.argv.slice(2);
 
-if (input.length > 2 || input.length < 2) {
+// ZU WENIGE/VIELE EINGABEN
+if (input.length !== 2) {
   console.log("Pls enter a word and a number.");
   process.exit(1);
 }
 
+// BUCHSTABENLISTE
 const letterList = Array.from({ length: 26 }, (_, i) =>
   String.fromCharCode(97 + i),
 );
@@ -13,38 +15,35 @@ let result = "";
 let word = input[0];
 let num;
 
+// BUCHSTABEN OBJECT
 letterList.forEach((letter, ind) => {
   letterObj[letter] = ind;
 });
 
-try {
-  num = Number(input[1]);
-} catch {
-  console.log("Pls enter a word and a number.");
-  process.exit(1);
-}
+// NUMMER UMWANDELN UND TESTEN
+num = Number(input[1]);
 
 if (isNaN(num)) {
   console.log("Pls enter a word and a number.");
   process.exit(1);
 }
 
+// RESULT ZUSAMMENSETZEN
 [...word].forEach((letter) => {
-  try {
-    if (letter === letter.toLowerCase()) {
-      result +=
-        letterList[(letterObj[letter.toLowerCase()] + num) % letterList.length];
-    } else {
-      result +=
-        letterList[
-          (letterObj[letter.toLowerCase()] + num) % letterList.length
-        ].toUpperCase();
-    }
-  } catch {
-    console.log(
-      "Pls enter a word and a number. The word may only include letters from a-z.",
-    );
-    process.exit(1);
+  const letterLow = letter.toLowerCase();
+  const k = letterList.length;
+
+  if (!Object.hasOwn(letterObj, letterLow)) {
+    result += letter;
+    return;
+  }
+
+  const objLetter = letterList[(((letterObj[letterLow] + num) % k) + k) % k];
+
+  if (letter === letterLow) {
+    result += objLetter;
+  } else {
+    result += objLetter.toUpperCase();
   }
 });
 

@@ -1,3 +1,4 @@
+// ALLE LEGALEN MOVES
 const moveList = {
   rock: ["scissors", "paper"],
   paper: ["rock", "scissors"],
@@ -9,6 +10,7 @@ const randomIndex = Math.floor(Math.random() * moves.length);
 const playerMove = process.argv.slice(2)[0]?.toLowerCase();
 const opponentMove = moves[randomIndex];
 
+// MOVES WERDEN VERGLICHEN - ERGEBNIS
 if (playerMove in moveList) {
   switch (opponentMove) {
     case moveList[playerMove][0]:
@@ -20,6 +22,7 @@ if (playerMove in moveList) {
     default:
       console.log(`\nYour ${playerMove} vs a ${opponentMove}: It's a draw.`);
   }
+  // FALLS DIE EINGABE NICHT IN MOVELIST VORHANDEN IST
 } else {
   console.log(`\nWhat is a ${playerMove}?`);
 }

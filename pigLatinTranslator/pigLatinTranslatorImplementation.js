@@ -21,7 +21,7 @@ for (let i = 0; i < k; i++) {
       newWord += letter;
     }
   }
-  // FALLS DAS WORT KEIN VOKAL ENTHÄLT
+  // FALLS DAS WORT KEINEN VOKAL ENTHÄLT
   if (j >= l) {
     input[i] = newWord + "-ay";
   }

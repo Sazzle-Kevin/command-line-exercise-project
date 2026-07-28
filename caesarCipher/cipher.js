@@ -29,22 +29,24 @@ if (isNaN(num)) {
 }
 
 // RESULT ZUSAMMENSETZEN
-[...word].forEach((letter) => {
+for (const letter of word) {
   const letterLow = letter.toLowerCase();
   const k = letterList.length;
 
   if (!Object.hasOwn(letterObj, letterLow)) {
     result += letter;
-    return;
+    continue;
   }
 
-  const objLetter = letterList[(((letterObj[letterLow] + num) % k) + k) % k];
+  const newLetter = letterList.at((letterObj[letterLow] + num) % k);
+  // ALTERNATIV:
+  // const newLetter = letterList[(((letterObj[letterLow] + num) % k) + k) % k];
 
   if (letter === letterLow) {
-    result += objLetter;
+    result += newLetter;
   } else {
-    result += objLetter.toUpperCase();
+    result += newLetter.toUpperCase();
   }
-});
+}
 
 console.log(result);

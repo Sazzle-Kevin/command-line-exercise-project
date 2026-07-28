@@ -1,30 +1,30 @@
 const vocals = new Set(["a", "e", "i", "o", "u"]);
-const firstInput = process.argv.slice(2)[0];
-const input = firstInput;
-
-// TEST, OB ES SICH UM EIN WORT HANDELT - (BUCHSTABENTEST)
-function isWord(word) {
-  return /^\p{L}+$/u.test(word);
-}
-
-let isInputWord = isWord(input);
+const input = process.argv.slice(2);
+const k = input.length;
 
 // ANWENDUNG DER REGELN AUF DEN INPUT - WORT-KREATION
-if (isInputWord) {
-  let ind = 0;
-  for (const letter of input) {
+for (let i = 0; i < k; i++) {
+  const word = input[i];
+  const l = word.length;
+  let j = 0;
+  let newWord = "";
+
+  for (j = 0; j < l; j++) {
+    const letter = word[j];
     if (vocals.has(letter.toLowerCase())) {
-      ind > 0
-        ? console.log(input.slice(ind) + "-" + input.slice(0, ind) + "ay")
-        : console.log(input + "-way");
-      return;
+      j > 0
+        ? (newWord = word.slice(j) + "-" + newWord + "ay")
+        : (newWord = word + "-way");
+      input[i] = newWord;
+      break;
+    } else {
+      newWord += letter;
     }
-    ind++;
   }
-} else {
-  console.log(`${input} ist nicht gültig. Bitte gib ein Wort ein.`);
-  process.exit(1);
+  // FALLS DAS WORT KEIN VOKAL ENTHÄLT
+  if (j >= l) {
+    input[i] = newWord + "-ay";
+  }
 }
 
-// FALLS DAS WORT KEIN VOKAL ENTHÄLT
-console.log(input + "-ay");
+console.log(input.join(" "));

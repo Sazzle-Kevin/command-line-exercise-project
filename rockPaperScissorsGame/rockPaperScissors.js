@@ -14,13 +14,13 @@ const opponentMove = moves[randomIndex];
 if (playerMove in moveList) {
   switch (opponentMove) {
     case moveList[playerMove][0]:
-      console.log(`\nYour ${playerMove} vs a ${opponentMove}: YOU WIN!`);
+      console.log(`\nYour ${playerMove} vs ${opponentMove}: YOU WIN!`);
       break;
     case moveList[playerMove][1]:
-      console.log(`\nYour ${playerMove} vs a ${opponentMove}: You lose.`);
+      console.log(`\nYour ${playerMove} vs ${opponentMove}: You lose.`);
       break;
     default:
-      console.log(`\nYour ${playerMove} vs a ${opponentMove}: It's a draw.`);
+      console.log(`\nYour ${playerMove} vs ${opponentMove}: It's a draw.`);
   }
   // FALLS DIE EINGABE NICHT IN MOVELIST VORHANDEN IST
 } else {

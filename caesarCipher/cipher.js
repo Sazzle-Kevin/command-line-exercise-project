@@ -2,7 +2,7 @@ const input = process.argv.slice(2);
 
 // ZU WENIGE/VIELE EINGABEN
 if (input.length !== 2) {
-  console.log("Pls enter a word and a number.");
+  console.log('Pls enter a word or a phrase within "" and a number.');
   process.exit(1);
 }
 
@@ -11,8 +11,8 @@ const letterList = Array.from({ length: 26 }, (_, i) =>
   String.fromCharCode(97 + i),
 );
 const letterObj = {};
-let result = "";
 let word = input[0];
+let result = "";
 let num;
 
 // BUCHSTABEN OBJECT
@@ -24,7 +24,11 @@ letterList.forEach((letter, ind) => {
 num = Number(input[1]);
 
 if (isNaN(num)) {
-  console.log("Pls enter a word and a number.");
+  console.log(
+    `
+Wrong number input: ${input[1]}.
+Pls enter a word or a phrase within "" and a number.`,
+  );
   process.exit(1);
 }
 
